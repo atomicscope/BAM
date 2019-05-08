@@ -18,7 +18,7 @@
                 "description": "ServerLess360 Custom connector which helps you track data from your business processes.",
                 "displayName": "[parameters('customConnectorName')]",
                 "backendService": {
-                    "serviceUrl": "sl360-stag-tracking.azurewebsites.net"
+                    "serviceUrl": "https://sl360-stag-tracking.azurewebsites.net"
                 },
                 "swagger": {
                     "swagger": "2.0",
@@ -29,7 +29,7 @@
                     },
                     "basePath": "/",
                     "definitions": {},
-                    "host": "sl360-stag-tracking.azurewebsites.net",
+                    "host": "https://sl360-stag-tracking.azurewebsites.net",
                     "paths": {
                         "/api/StartActivity": {
                             "post": {
