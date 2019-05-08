@@ -2,7 +2,7 @@
 
 This repository will deploy the Serverless360 custom connectors to your Azure Resource Group
 
--Click the below button to deploy the custom connector to your Resource Group
+> Click the below button to deploy the custom connector to your Resource Group
 
 ## Important Points to be Noted
 
