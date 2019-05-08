@@ -32,6 +32,7 @@
                 },
                 "description": "ServerLess360 Custom connector which helps you track data from your business processes.",
                 "displayName": "[parameters('customConnectorName')]",
+                "iconUri": "https://sb360stagstorage.blob.core.windows.net/msi/SL360-Logo-small.png",
                 "backendService": {
                     "serviceUrl": "https://sl360-stag-tracking.azurewebsites.net"
                 },
