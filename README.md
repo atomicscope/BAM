@@ -13,7 +13,7 @@ process flow across all your components from a single portal.
 
 ## What is this connector ?
 
-If you are familiar with Azure Logic Apps you must've used the designer view to create your own Orchestrations. To create it you will be using an Action. An action or otherwise known as connector , eg : Facebook, Outlook, Twitter etc.. To enable users to track data from their Business Logic into ServerLess360 BAM we provide this connector. Know more about how to leverage it in your applications here --> [Documentation](docs.serverless360.com)
+If you are familiar with Azure Logic Apps you must've used the designer view to create your own Orchestrations. To create it you will be using an Action. An action or otherwise known as connector , eg : Facebook, Outlook, Twitter etc.. To enable users to track data from their Business Logic into ServerLess360 BAM we provide this connector. Know more about how to leverage it in your applications here --> [Documentation!](docs.serverless360.com)
 
 ## Important Points to be Noted
 
