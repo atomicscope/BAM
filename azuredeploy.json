@@ -278,7 +278,7 @@
                             "post": {
                                 "operationId": "LogExceptionActivity",
                                 "x-ms-visibility": "important",
-                                "description": "This action will log all exceptions.",
+                                "description": "This action is used to Log Exception using a StageActivityId.",
                                 "summary": "Log Exception Activity",
                                 "produces": [
                                     "application/json"

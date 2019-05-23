@@ -1,0 +1,382 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ServerLess360 Custom Start Activity Custom Connector",
+        "description": "ServerLess360 Custom connector helps you track your business processes.",
+        "version": "1.0.0"
+    },
+    "basePath": "/",
+    "definitions": {},
+    "host": "sl360-stag-tracking.azurewebsites.net",
+    "paths": {
+        "/api/StartActivity": {
+            "post": {
+                "operationId": "StartActivity",
+                "x-ms-visibility": "important",
+                "description": "This action will create a new Stage activity for tracking.",
+                "summary": "Start Activity",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "MessageBody": {
+                                    "type": "object",
+                                    "description": "Message body passed to the http trigger"
+                                },
+                                "MessageHeader": {
+                                    "type": "object",
+                                    "description": "Message header passed to the http trigger"
+                                }
+                            },
+                            "required": [
+                                "MessageBody",
+                                "MessageHeader"
+                            ]
+                        },
+                        "description": "Message body to get properties from the message payload.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-BusinessProcess",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide business process name.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-BusinessTransaction",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide business transaction name.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-CurrentStage",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Specify the name for current stage.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-MainActivityId",
+                        "in": "header",
+                        "type": "string",
+                        "x-ms-visibility": "advanced",
+                        "description": "If this logic app is continuation of existing message flow, provide MainActivityId either from previous logic app or pass the incoming HTTP header which should have MainActivityId.",
+                        "required": false
+                    },
+                    {
+                        "name": "SL360-PreviousStage",
+                        "in": "header",
+                        "type": "string",
+                        "description": "If this logic app is continuation of existing message flow, provide previous stage name.",
+                        "x-ms-visibility": "advanced",
+                        "required": false
+                    },
+                    {
+                        "name": "SL360-ArchiveMessage",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Set this flag as true to archive the message for this particular stage.",
+                        "required": false,
+                        "enum": [
+                            "True",
+                            "False"
+                        ]
+                    },
+                    {
+                        "name": "SL360-BatchId",
+                        "in": "header",
+                        "type": "string",
+                        "required": false,
+                        "description": "If this logic app is a batched message provide batch id."
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "x-ms-summary": "Returns the MainActivityId and StageActivityId that should be passed to UpdateActivity action.",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "MainActivityId": {
+                                    "type": "string",
+                                    "description": "MainActivityId"
+                                },
+                                "StageActivityId": {
+                                    "type": "string",
+                                    "description": "StageActivityId"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyQuery": []
+                    }
+                ]
+            }
+        },
+        "/api/UpdateActivity": {
+            "post": {
+                "operationId": "UpdateActivity",
+                "x-ms-visibility": "important",
+                "description": "This action will update an activity with properties provided as headers.",
+                "summary": "Update Activity",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "Body",
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "MessageBody": {
+                                    "type": "object",
+                                    "description": "Message body passed to the http trigger"
+                                },
+                                "MessageHeader": {
+                                    "type": "object",
+                                    "description": "Message header passed to the http trigger"
+                                }
+                            },
+                            "required": [
+                                "MessageBody",
+                                "MessageHeader"
+                            ]
+                        },
+                        "description": "Message body to get properties from the message payload.",
+                        "required": true
+                    },
+                    {
+                        "description": "Provide MainActivityId from the StartActivity action.",
+                        "in": "header",
+                        "name": "SL360-MainActivityId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "SL360-StageActivityId",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide StageActivityId from the StartActivity response.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-Status",
+                        "type": "string",
+                        "in": "header",
+                        "description": "Select the status of stage execution.",
+                        "required": false,
+                        "default": "Success",
+                        "x-ms-visibility": "important",
+                        "enum": [
+                            "Success",
+                            "Failure",
+                            "InProgress"
+                        ]
+                    },
+                    {
+                        "name": "SL360-BusinessProcess",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide business process name.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-BusinessTransaction",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide business transaction name.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-CurrentStage",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Specify the name for current stage.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-ArchiveMessage",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Set this flag as true to archive the message for this particular stage.",
+                        "required": false,
+                        "enum": [
+                            "True",
+                            "False"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyQuery": []
+                    }
+                ]
+            }
+        },
+        "/api/LogExceptionActivity": {
+            "post": {
+                "operationId": "LogExceptionActivity",
+                "x-ms-visibility": "important",
+                "description": "This action will log all exceptions.",
+                "summary": "Log Exception Activity",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "SL360-StageActivityId",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide StageActivityId from the StartActivity response.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-ExceptionMessage",
+                        "in": "header",
+                        "description": "Enter the ExceptionMessage.",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-ExceptionCode",
+                        "in": "header",
+                        "description": "Enter the ExceptionCode.",
+                        "type": "string",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-BusinessProcess",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide business process name.",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyQuery": []
+                    }
+                ]
+            }
+        },
+        "/api/ArchiveActivity": {
+            "post": {
+                "operationId": "ArchiveActivity",
+                "x-ms-visibility": "important",
+                "description": "This action will create a new Archive activity for archiving Message.",
+                "summary": "Archive Activity",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "description": "Message body to get properties from the message payload.",
+                        "in": "body",
+                        "name": "Body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "MessageBody": {
+                                    "type": "object",
+                                    "description": "Message body passed to the http trigger"
+                                },
+                                "MessageHeader": {
+                                    "type": "object",
+                                    "description": "Message header passed to the http trigger"
+                                }
+                            },
+                            "required": [
+                                "MessageBody",
+                                "MessageHeader"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "SL360-BusinessProcess",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide business process name.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-BusinessTransaction",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Provide business transaction name.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-CurrentStage",
+                        "in": "header",
+                        "type": "string",
+                        "description": "Specify the name for current stage.",
+                        "required": true
+                    },
+                    {
+                        "name": "SL360-StageActivityId",
+                        "in": "header",
+                        "description": "Provide StageActivityId from the StartActivity response.",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "security": [
+                    {
+                        "apikeyQuery": []
+                    }
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "securityDefinitions": {
+        "apikeyQuery": {
+            "type": "apiKey",
+            "name": "code",
+            "in": "query"
+        }
+    }
+}
