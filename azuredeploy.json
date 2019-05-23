@@ -51,8 +51,8 @@
                             "post": {
                                 "operationId": "StartActivity",
                                 "x-ms-visibility": "important",
-                                "description": "This action will create a new Stage activity for tracking.",
-                                "summary": "Start Activity",
+                                "description": "This action will start a new business transaction activity.",
+                                "summary": "Starts an activity",
                                 "produces": [
                                     "application/json"
                                 ],
@@ -169,8 +169,8 @@
                             "post": {
                                 "operationId": "UpdateActivity",
                                 "x-ms-visibility": "important",
-                                "description": "This action will update an activity with properties provided as headers.",
-                                "summary": "Update Activity",
+                                "description": "This action will update a existing transaction activity.",
+                                "summary": "Updates an activity",
                                 "produces": [
                                     "application/json"
                                 ],
@@ -278,8 +278,8 @@
                             "post": {
                                 "operationId": "LogExceptionActivity",
                                 "x-ms-visibility": "important",
-                                "description": "This action is used to Log Exception using a StageActivityId.",
-                                "summary": "Log Exception Activity",
+                                "description": "This action logs an exception to the transaction activity.",
+                                "summary": "Logs an exception for an activity",
                                 "produces": [
                                     "application/json"
                                 ],
@@ -332,8 +332,8 @@
                             "post": {
                                 "operationId": "ArchiveActivity",
                                 "x-ms-visibility": "important",
-                                "description": "This action will create a new Archive activity for archiving Message.",
-                                "summary": "Archive Activity",
+                                "description": "This action will archives messages for a transaction activity",
+                                "summary": "Archives an activity message",
                                 "produces": [
                                     "application/json"
                                 ],
