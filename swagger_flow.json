@@ -7,7 +7,7 @@
     },
     "basePath": "/",
     "definitions": {},
-    "host": "sl360-stag-tracking.azurewebsites.net",
+    "host": "sl360-bam.azurewebsites.net",
     "paths": {
         "/api/StartActivity": {
             "post": {
