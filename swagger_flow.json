@@ -1,13 +1,13 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "ServerLess360 Custom Start Activity Custom Connector",
+        "title": "ServerLess360 Custom Connector",
         "description": "ServerLess360 Custom connector helps you track your business processes.",
         "version": "1.0.0"
     },
     "basePath": "/",
     "definitions": {},
-    "host": "sl360-bam.azurewebsites.net",
+    "host": "sl360-prod-BAM-functionapp.azurewebsites.net",
     "paths": {
         "/api/StartActivity": {
             "post": {
@@ -50,7 +50,7 @@
                         "in": "header",
                         "type": "string",
                         "description": "Provide business process name.",
-                        "x-ms-summary": "Business process name that is configured on the portal.",
+                        "x-ms-summary": "SL360-BusinessProcess",
                         "required": true
                     },
                     {
@@ -58,7 +58,7 @@
                         "in": "header",
                         "type": "string",
                         "description": "Provide business transaction name.",
-                        "x-ms-summary": "Business transaction name that is configured on the portal under the business process.",
+                        "x-ms-summary": "SL360-BusinessTransaction",
                         "required": true
                     },
                     {
@@ -66,7 +66,7 @@
                         "in": "header",
                         "type": "string",
                         "description": "Specify the name for current stage.",
-                        "x-ms-summary": "Current stage name that is configured on the portal under the business transaction.",
+                        "x-ms-summary": "SL360-CurrentStage",
                         "required": true
                     },
                     {
@@ -75,7 +75,7 @@
                         "type": "string",
                         "x-ms-visibility": "advanced",
                         "description": "If this logic app is continuation of existing message flow, provide MainActivityId either from previous logic app or pass the incoming HTTP header which should have MainActivityId.",
-                        "x-ms-summary": "Use this id on the update activity to update an existing transaction or leave it blank to generate a new activity.",
+                        "x-ms-summary": "SL360-MainActivityId",
                         "required": false
                     },
                     {
@@ -83,7 +83,7 @@
                         "in": "header",
                         "type": "string",
                         "description": "If this logic app is continuation of existing message flow, provide previous stage name.",
-                        "x-ms-summary": "This parameter is mandatory if you are updating an existing transaction.",
+                        "x-ms-summary": "SL360-PreviousStage",
                         "x-ms-visibility": "advanced",
                         "required": false
                     },
@@ -92,7 +92,7 @@
                         "in": "header",
                         "type": "string",
                         "description": "Set this flag as true to archive the message for this particular stage.",
-                        "x-ms-summary": "Archive the message at this particular stage.",
+                        "x-ms-summary": "SL360-ArchiveMessage",
                         "required": false,
                         "enum": [
                             "True",
@@ -104,7 +104,7 @@
                         "in": "header",
                         "type": "string",
                         "required": false,
-                        "x-ms-summary": "Provide a string/guid here to keep track of batched messages.",
+                        "x-ms-summary": "SL360-BatchId",
                         "description": "If this logic app is a batched message provide batch id."
                     }
                 ],
@@ -174,7 +174,7 @@
                         "description": "Provide MainActivityId from the StartActivity action.",
                         "in": "header",
                         "name": "SL360-MainActivityId",
-                        "x-ms-summary": "Update an existing transaction using the MainActivityId output from StartActivity.",
+                        "x-ms-summary": "SL360-MainActivityId",
                         "required": true,
                         "type": "string"
                     },
@@ -183,7 +183,7 @@
                         "in": "header",
                         "type": "string",
                         "description": "Provide StageActivityId from the StartActivity response.",
-                        "x-ms-summary": "Update an existing transaction using the StageActivityId output from StartActivity.",
+                        "x-ms-summary": "SL360-StageActivityId",
                         "required": true
                     },
                     {
@@ -191,7 +191,7 @@
                         "type": "string",
                         "in": "header",
                         "description": "Select the status of stage execution.",
-                        "x-ms-summary": "This can be set based on business logic.",
+                        "x-ms-summary": "SL360-Status",
                         "required": false,
                         "default": "Success",
                         "x-ms-visibility": "important",
@@ -206,14 +206,14 @@
                         "in": "header",
                         "type": "string",
                         "description": "Provide business process name.",
-                        "x-ms-summary": "Business process name that is configured on the portal.",
+                        "x-ms-summary": "SL360-BusinessProcess",
                         "required": true
                     },
                     {
                         "name": "SL360-BusinessTransaction",
                         "in": "header",
                         "type": "string",
-                        "x-ms-summary": "Business transaction name that is configured on the portal under the business process.",
+                        "x-ms-summary": "SL360-BusinessTransaction",
                         "description": "Provide business transaction name.",
                         "required": true
                     },
@@ -221,7 +221,7 @@
                         "name": "SL360-CurrentStage",
                         "in": "header",
                         "type": "string",
-                        "x-ms-summary": "Current stage name that is configured on the portal under the business transaction.",
+                        "x-ms-summary": "SL360-CurrentStage",
                         "description": "Specify the name for current stage.",
                         "required": true
                     },
@@ -230,7 +230,7 @@
                         "in": "header",
                         "type": "string",
                         "description": "Set this flag as true to archive the message for this particular stage.",
-                        "x-ms-summary": "Archive the message at this particular stage.",
+                        "x-ms-summary": "SL360-ArchiveMessage",
                         "required": false,
                         "enum": [
                             "True",
@@ -267,7 +267,7 @@
                         "name": "SL360-StageActivityId",
                         "in": "header",
                         "type": "string",
-                        "x-ms-summary": "Log an Exception for a stage by providing a stageactivityid.",
+                        "x-ms-summary": "SL360-StageActivityId",
                         "description": "Provide StageActivityId from the StartActivity response.",
                         "required": true
                     },
@@ -275,7 +275,7 @@
                         "name": "SL360-ExceptionMessage",
                         "in": "header",
                         "description": "Enter the ExceptionMessage.",
-                        "x-ms-summary": "You can enter a string message that you use for logging your exception.",
+                        "x-ms-summary": "SL360-ExceptionMessage",
                         "type": "string",
                         "required": true
                     },
@@ -283,7 +283,7 @@
                         "name": "SL360-ExceptionCode",
                         "in": "header",
                         "description": "Enter the ExceptionCode.",
-                        "x-ms-summary": "You can enter a code that you use for logging your exception code or fault code.",
+                        "x-ms-summary": "SL360-ExceptionCode",
                         "type": "string",
                         "required": true
                     },
@@ -291,7 +291,7 @@
                         "name": "SL360-BusinessProcess",
                         "in": "header",
                         "type": "string",
-                        "x-ms-summary": "Business process name that is configured on the portal.",
+                        "x-ms-summary": "SL360-BusinessProcess",
                         "description": "Provide business process name.",
                         "required": true
                     }
@@ -348,7 +348,7 @@
                         "name": "SL360-BusinessProcess",
                         "in": "header",
                         "type": "string",
-                        "x-ms-summary": "Business process name that is configured on the portal.",
+                        "x-ms-summary": "SL360-BusinessProcess",
                         "description": "Provide business process name.",
                         "required": true
                     },
@@ -356,7 +356,7 @@
                         "name": "SL360-BusinessTransaction",
                         "in": "header",
                         "type": "string",
-                        "x-ms-summary": "Business transaction name that is configured on the portal under the business process.",
+                        "x-ms-summary": "SL360-BusinessTransaction",
                         "description": "Provide business transaction name.",
                         "required": true
                     },
@@ -364,14 +364,14 @@
                         "name": "SL360-CurrentStage",
                         "in": "header",
                         "type": "string",
-                        "x-ms-summary": "Current stage name that is configured on the portal under the business transaction.",
+                        "x-ms-summary": "SL360-CurrentStage",
                         "description": "Specify the name for current stage.",
                         "required": true
                     },
                     {
                         "name": "SL360-StageActivityId",
                         "in": "header",
-                        "x-ms-summary": "Archive a message for a stage by providing a stageactivityid.",
+                        "x-ms-summary": "SL360-StageActivityId",
                         "description": "Provide StageActivityId from the StartActivity response.",
                         "type": "string",
                         "required": true
@@ -389,4 +389,16 @@
                 ]
             }
         }
+    },
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "securityDefinitions": {
+        "apikeyQuery": {
+            "type": "apiKey",
+            "name": "code",
+            "in": "query"
+        }
     }
+}
